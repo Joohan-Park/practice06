@@ -1,25 +1,26 @@
-package prob4;
+package prob6;
 
-public class MyStack implements Stack {
+public class MyStack<T> implements Stack<T> {
 
 	private int size;
 	private int top;
-	private String[] buffer;
+	private T[] buffer;
 	
 	public MyStack(int size) {
 		resize(size);
 	}
 	private void resize(int size) {
-		String[] tempBuffer = new String[size];
+		//String[] tempBuffer = new String[size];
+		T[] tempBuffer = (T[])new Object[size];
+		
 		for (int i = 0; i < top; i++) {
 			tempBuffer[i] = buffer[i];
 		}
-//		tempBuffer = buffer;
 		buffer = tempBuffer;
 		this.size = size;
 	}
 	@Override
-	public void push(String item) {
+	public void push(T item) {
 
 		if (top == size) {
 			resize(size * 2);
@@ -27,7 +28,7 @@ public class MyStack implements Stack {
 		buffer[top++] = item;
 	}
 	@Override
-	public String pop() throws MyStackException {
+	public T pop() throws MyStackException {
 		if(top == 0){
 			throw new MyStackException("stack is empty");
 		}
